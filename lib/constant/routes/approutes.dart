@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../view/Screens/ControllerScreen/ControllerScreen.dart';
 import '../../view/Screens/Login/Login_Screen.dart';
+import '../../view/Screens/pendingRequestCard/pendingTeacherList.dart';
 
 // import other screens as needed
 
@@ -17,7 +18,7 @@ class AppRoutes {
   static List<GetPage> routes = [
     GetPage(name: login, page: () => LoginScreen()),
     GetPage(name: controller, page: () => Controllerscreen()),
-    // GetPage(name: Pendingrequest, page: () => StudentActionsScreen()),
+    GetPage(name: Pendingrequest, page: () => TeacherListScreen()),
     // GetPage(name: holiday, page: () => StudentActionsScreen()),
     // Ensure these screens are implemented
     // GetPage(name: teacher, page: () => TeacherActionsScreen()),
