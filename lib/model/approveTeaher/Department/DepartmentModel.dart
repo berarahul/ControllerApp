@@ -1,16 +1,22 @@
 class Department {
-  int id;
-  String name;
+  int? id;
+  String? departmentName;
 
-  Department({
-    required this.id,
-    required this.name,
-  });
+  Department({this.id, this.departmentName});
 
+  // Factory method to create a Department instance from JSON
   factory Department.fromJson(Map<String, dynamic> json) {
     return Department(
-      id: json['id'],
-      name: json['name'],
+      id: json['id'] as int?,
+      departmentName: json['departmentName'] as String?,
     );
+  }
+
+  // Method to convert Department instance to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'departmentName': departmentName,
+    };
   }
 }
