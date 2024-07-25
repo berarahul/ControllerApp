@@ -1,41 +1,65 @@
-// teacher_controller.dart
-import 'package:controller/model/DepartmentCard/allDepartmentModel.dart';
+import 'package:controller/model/DepartmentCard/allTeacherModel.dart';
 import 'package:controller/viewmodel/services/hodServices/HodDropdownController.dart';
+import 'package:controller/viewmodel/services/hodServices/TeacherService.dart';
 import 'package:get/get.dart';
 
-import '../../../model/DepartmentCard/allTeacherModel.dart';
-import 'TeacherService.dart';
+import '../../../../model/DepartmentCard/allDepartmentModel.dart';
 
+// Update the import as needed
 
-class TeacherControllerHOD extends GetxController {
+class Teacherdropdowncontroller extends GetxController {
   var teachers = <AllTeacherModel>[].obs;
-  var selectedTeacher = Rx<AllTeacherModel?>(null);
+  var selectedteachers = Rxn<AllTeacherModel>();
   var isLoading = false.obs;
 
- final Hoddropdowncontroller controller= Hoddropdowncontroller();
-
+  int departmentId = 0;
   @override
   void onInit() {
-    fetchTeachers();
+
     super.onInit();
   }
 
-  void fetchTeachers() async {
+
+  Future<void> fetchTeacherss(int dept) async {
+
+
+    departmentId = dept;
     isLoading.value = true;
     try {
-      var fetchedTeachers = await TeacherService().getTeachers(controller.selectedDepartment as AllDepartmentModel);
-      if (fetchedTeachers != null) {
-        teachers.value = fetchedTeachers;
-      }
+      final List<AllTeacherModel> teacherList = await TeacherService.fetchTeachers(dept);
+      teachers.value = teacherList;
+      print(teacherList);
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to fetch Teachers');
     } finally {
       isLoading.value = false;
     }
   }
 
-  void updateSelectedTeacher(int? teacherId) {
-    selectedTeacher.value = teachers.firstWhere(
-          (teacher) => teacher.teacherId == teacherId,
-      orElse: () => AllTeacherModel(teacherId: -1, name: 'Unknown'),
-    );
+  void setSelectedTeacher(AllTeacherModel? teacher) {
+    selectedteachers.value = teacher;
   }
+
+  Future<void> changeHod() async {
+    if (selectedteachers.value == null) {
+      Get.snackbar('Error', 'Please select a Teacher to Change');
+      return;
+    }
+
+    isLoading.value = true;
+    try {
+      await TeacherService.ChangeHOD(selectedteachers.value!.teacherId,departmentId as int);
+      teachers.remove(selectedteachers.value);
+      setSelectedTeacher(null);
+      Get.snackbar('Success', 'HOD change successfully');
+    } catch (e) {
+      print(e);
+      Get.snackbar('Error', 'Failed to Change HOD');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+
 }
+

@@ -1,40 +1,55 @@
-// teacher_dropdown.dart
+import 'package:controller/model/DepartmentCard/allTeacherModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../../model/DepartmentCard/allDepartmentModel.dart';
+import '../../../../viewmodel/services/DepartmentServices/Delete/DeleteDepartmentController.dart';
 import '../../../../viewmodel/services/hodServices/TeacherDropdownController.dart';
 
 class TeacherDropdown extends StatelessWidget {
-  final Function(int?)? onChanged;
-
-  TeacherDropdown({this.onChanged});
-
   @override
   Widget build(BuildContext context) {
-    final TeacherControllerHOD teacherController = Get.find();
+    final Teacherdropdowncontroller TeacherController = Get.find();
 
     return Obx(() {
-      if (teacherController.isLoading.value) {
+      if (TeacherController.isLoading.value) {
         return const Center(child: CircularProgressIndicator());
       }
 
-      return DropdownButton<int>(
-        hint: const Text('Select Teacher'),
-        value: teacherController.selectedTeacher.value?.teacherId == -1
-            ? null
-            : teacherController.selectedTeacher.value?.teacherId,
-        onChanged: (int? newValue) {
-          teacherController.updateSelectedTeacher(newValue);
-          if (onChanged != null) {
-            onChanged!(newValue);
-          }
-        },
-        items: teacherController.teachers.map((teacher) {
-          return DropdownMenuItem<int>(
-            value: teacher.teacherId,
-            child: Text(teacher.name),
-          );
-        }).toList(),
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(color: Colors.grey, width: 1),
+        ),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton<AllTeacherModel>(
+            hint: const Text('Select Teacher', style: TextStyle(color: Colors.black)),
+            value: TeacherController.selectedteachers.value,
+            onChanged: (AllTeacherModel? newValue) {
+              TeacherController.selectedteachers(newValue);
+            },
+            items: TeacherController.teachers.map((AllTeacherModel teacher) {
+              return DropdownMenuItem<AllTeacherModel>(
+                value: teacher,
+                child: Text(
+                  teacher.name,
+                  style: const TextStyle(color: Colors.black),
+                ),
+              );
+            }).toList(),
+            isExpanded: true,
+            dropdownColor: Colors.white,
+            icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+            ),
+          ),
+        ),
       );
     });
   }
 }
+

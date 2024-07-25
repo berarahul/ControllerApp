@@ -12,7 +12,7 @@ import '../DepartmentCard/Widgets/departmentDropdownWidget.dart';
 class ChangeHodScreen extends StatelessWidget {
   final HodController hodController = Get.put(HodController());
   final Hoddropdowncontroller deleteController = Get.put(Hoddropdowncontroller());
-  final TeacherControllerHOD teacherController= Get.put(TeacherControllerHOD());
+Teacherdropdowncontroller teacherdropdowncontroller = Get.put(Teacherdropdowncontroller());
   final isLoading = false.obs;
 
   @override
@@ -36,6 +36,7 @@ class ChangeHodScreen extends StatelessWidget {
                     }
                   },
                 ),
+                SizedBox(height: 20,),
                 Obx(() {
                   if (hodController.isLoading.value) {
                     return const CircularProgressIndicator();
@@ -47,22 +48,17 @@ class ChangeHodScreen extends StatelessWidget {
                 }),
                 SizedBox(height: 20,),
 
+                TeacherDropdown(),
+
                 const SizedBox(height: 20),
-                TeacherDropdown(
-                  onChanged: (int? newValue) {
-                    if (newValue != null) {
-                      teacherController.updateSelectedTeacher(newValue);
-                    }
-                  },
-                ),
 
                 const SizedBox(height: 16),
                 Obx(() => ElevatedButton(
                   onPressed: () {
                     isLoading.value = true; // Start loading indicator
-                    // deleteController.deleteDepartment().then((_) {
-                    //   isLoading.value = false; // Stop loading indicator when done
-                    // });
+                    teacherdropdowncontroller.changeHod().then((_) {
+                      isLoading.value = false; // Stop loading indicator when done
+                    });
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -83,7 +79,7 @@ class ChangeHodScreen extends StatelessWidget {
                       strokeWidth: 2,
                     ),
                   )
-                      : const Text('Delete', style: TextStyle(fontSize: 16)),
+                      : const Text('Change HOD', style: TextStyle(fontSize: 16)),
                 )),
               ],
             ),

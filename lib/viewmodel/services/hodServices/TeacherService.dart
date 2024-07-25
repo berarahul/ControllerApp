@@ -1,63 +1,46 @@
-// // teacher_service.dart
-// import 'package:controller/viewmodel/services/hodServices/HodDropdownController.dart';
-// import 'package:get/get.dart';
-// import 'package:http/http.dart' as http;
-// import 'dart:convert';
-//
-// import '../../../model/DepartmentCard/allTeacherModel.dart';
-//
-//
-//
-// class TeacherService {
-//
-//   final String apiUrl = 'https://attendancesystem-s1.onrender.com/api/hod/teacher/allTeachers?deptId=$deptID'; // Replace with your API URL
-//
-//   Future<List<AllTeacherModel>?> getTeachers() async {
-//
-//     try {
-//       final response = await http.get(Uri.parse(apiUrl));
-//
-//       if (response.statusCode == 200) {
-//         List jsonResponse = json.decode(response.body);
-//         return jsonResponse.map((data) => AllTeacherModel.fromJson(data)).toList();
-//       } else {
-//         // Handle server errors
-//         print('Failed to load teachers');
-//         return null;
-//       }
-//     } catch (e) {
-//       // Handle network errors
-//       print('Error: $e');
-//       return null;
-//     }
-//   }
-// }
-
-
-
-// teacher_service.dart
-import 'package:controller/model/DepartmentCard/allDepartmentModel.dart';
+import 'package:controller/model/DepartmentCard/allTeacherModel.dart';
+import 'package:controller/viewmodel/services/LoginService/AutharizationHeader.dart';
+import 'package:controller/viewmodel/services/hodServices/HodDropdownController.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../../../model/DepartmentCard/allTeacherModel.dart';
+
+import '../../../../model/DepartmentCard/allDepartmentModel.dart';
+
+// Update the import as needed
+ApiHelper apiHelper = ApiHelper();
 
 class TeacherService {
-  Future<List<AllTeacherModel>?> getTeachers(AllDepartmentModel deptID) async {
-    final String apiUrl = 'https://attendancesystem-s1.onrender.com/api/hod/teacher/allTeachers?deptId=$deptID';
+  static Future<List<AllTeacherModel>> fetchTeachers(int deptid) async {
+    ApiHelper apiHelper = ApiHelper(); // Create an instance of ApiHelper
+    final headers = await apiHelper.getHeaders();
+    final response = await http.get(
+      Uri.parse(
+          'https://attendancesystem-s1.onrender.com/api/hod/teacher/allTeachers?deptId=$deptid'), // Replace with your API endpoint
+      headers: headers,
 
-    try {
-      final response = await http.get(Uri.parse(apiUrl));
+    );
 
-      if (response.statusCode == 200) {
-        List jsonResponse = json.decode(response.body);
-        return jsonResponse.map((data) => AllTeacherModel.fromJson(data)).toList();
-      } else {
-        print('Failed to load teachers');
-        return null;
-      }
-    } catch (e) {
-      print('Error: $e');
-      return null;
+    if (response.statusCode == 200) {
+      print("HI success");
+      final List<dynamic> jsonList = jsonDecode(response.body);
+      print(jsonList);
+      return jsonList.map((json) => AllTeacherModel.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load Teachers');
+    }
+  }
+
+  static Future<void> ChangeHOD(int teacherID,int deptID) async {
+    print("Hi update");
+    ApiHelper apiHelper = ApiHelper(); // Create an instance of ApiHelper
+    final headers = await apiHelper.getHeaders();
+    final response = await ApiHelper.update(
+      'controller/changeHOD?deptId=$deptID&newHodId=$teacherID', // Replace with your API endpoint
+      headers: headers,
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to Change HOD');
     }
   }
 }
