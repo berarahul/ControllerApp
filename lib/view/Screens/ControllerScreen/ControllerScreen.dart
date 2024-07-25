@@ -8,11 +8,13 @@ import '../../../viewmodel/services/LoginService/AuthServices.dart';
 
 
 class Controllerscreen extends StatelessWidget {
-  final List<String> buttonNames = ['Pending Request', 'Department','Holiday'];
+  final List<String> buttonNames = ['Pending Request', 'Department','HOD','Holiday'];
   final List<String> iconPaths = [
     'assets/images/pending_request.png', // replace with your student icon path
     // replace with your teacher icon path
     'assets/images/department.png',
+
+    'assets/images/hod.png', // replace with your subject icon path
     'assets/images/holiday.png', // replace with your subject icon path
     // 'assets/images/Routine.png'  // replace with your Routine icon path
   ];
@@ -75,7 +77,7 @@ class Controllerscreen extends StatelessWidget {
                             child: Row(
                               children: [
                                 Expanded(
-                                  flex: 3,
+                                  flex: 4,
                                   child: AdminCard(
                                     title: buttonNames[index],
                                     iconPath: iconPaths[index],
@@ -85,6 +87,9 @@ class Controllerscreen extends StatelessWidget {
                                       }
                                       else if (buttonNames[index] == 'Department') {
                                         Get.toNamed(AppRoutes.Department);
+                                      }
+                                      else if (buttonNames[index] == 'HOD') {
+                                        Get.toNamed(AppRoutes.HOD);
                                       }
                                       else if (buttonNames[index] == 'Holiday') {
                                         Get.toNamed(AppRoutes.holiday);
