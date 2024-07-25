@@ -1,3 +1,5 @@
+import 'package:controller/view/Screens/holidayCard/widgets/UpdateAndDeleteHolidayScreen.dart';
+import 'package:controller/view/Screens/holidayCard/widgets/createholidayScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -93,14 +95,11 @@ class HolidayActionsScreen extends StatelessWidget {
       controller.addHoliday();
       _showAddHolidayModal(context);
     }
-    else if (action == 'Update Holiday') {
-      controller.editHoliday();
+    else if (action == 'Update And Delete Holiday') {
+      controller.editDeleteHoliday();
       _showUpdateHolidayModal(context);
     }
-    else if (action == 'Delete Holiday') {
-      controller.deleteHoliday();
-      _showDeleteHolidayModal(context);
-    }
+
   }
 
   void _showAddHolidayModal(BuildContext context) {
@@ -111,7 +110,7 @@ class HolidayActionsScreen extends StatelessWidget {
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
-        // child: AddDepartmentModal(),
+        child: Createholidayscreen(),
       ),
     );
   }
@@ -124,24 +123,13 @@ class HolidayActionsScreen extends StatelessWidget {
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
-        // child: RemoveStudentModal(),
+     child: HolidayListScreen(),
       ),
     );
   }
 
 
-  void _showDeleteHolidayModal(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-        ),
-        // child: RemoveStudentModal(),
-      ),
-    );
-  }
+
 
 
 
@@ -213,7 +201,7 @@ class HolidayActionWidget extends StatelessWidget {
       case 'Create Holiday':
         iconData = Icons.add_circle_outline;
         break;
-      case 'Update Holiday':
+      case 'Update And Delete Holiday':
         iconData = Icons.update;
         break;
         case 'Delete Holiday':
