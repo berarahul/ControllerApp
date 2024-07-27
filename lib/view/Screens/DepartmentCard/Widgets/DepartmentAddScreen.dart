@@ -1,180 +1,75 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import '../../../../viewmodel/services/DepartmentServices/add/CreateDepartmentController.dart';
-// // Update the import as needed
-//
-// class AddDepartmentScreen extends StatelessWidget {
-//   final CreateDepartmentController departmentController = Get.put(CreateDepartmentController());
-//   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-//   final TextEditingController _textEditingController = TextEditingController();
-//   final RxBool isLoading = false.obs;
-//   @override
-//   Widget build(BuildContext context) {
-//     // Listen to departmentName changes and update the TextEditingController
-//     ever(departmentController.departmentName, (value) {
-//       _textEditingController.value = _textEditingController.value.copyWith(
-//         text: value,
-//         selection: TextSelection.fromPosition(
-//           TextPosition(offset: value.length),
-//         ),
-//       );
-//     });
-//
-//     return Scaffold(
-//       appBar: AppBar(
-//         automaticallyImplyLeading: false,
-//         title: const Text('Add Department'),
-//       ),
-//       body: Center(
-//         child: Padding(
-//           padding: const EdgeInsets.all(16.0),
-//           child: Form(
-//             key: _formKey,
-//             child: Column(
-//               mainAxisAlignment: MainAxisAlignment.center,
-//               children: [
-//                 TextFormField(
-//                   decoration: const InputDecoration(
-//                     labelText: 'Department Name',
-//                     border: OutlineInputBorder(),
-//                   ),
-//                   onChanged: departmentController.setDepartmentName,
-//                   controller: _textEditingController,
-//                   validator: (value) {
-//                     if (value == null || value.isEmpty) {
-//                       return 'Please enter a department name';
-//                     }
-//                     return null;
-//                   },
-//                 ),
-//                 const SizedBox(height: 120),
-//                 Obx(() => departmentController.isLoading.value
-//                     ? const CircularProgressIndicator()
-//                     : ElevatedButton(
-//                   onPressed: () {
-//                     if (_formKey.currentState?.validate() ?? false) {
-//                       departmentController.addDepartment();
-//                     }
-//                   },
-//
-//                   style: ElevatedButton.styleFrom(
-//                     foregroundColor: Colors.white, backgroundColor: Colors.blue,
-//                     padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-//                     minimumSize: Size(100, 60),
-//                     shape: RoundedRectangleBorder(
-//                       borderRadius: BorderRadius.circular(30),
-//                     ),
-//                     elevation: 5,
-//                   ),
-//                   child: isLoading.value
-//                       ? const SizedBox(
-//                     width: 24,
-//                     height: 24,
-//                     child: CircularProgressIndicator(
-//                       color: Colors.black,
-//                       strokeWidth: 2,
-//                     ),
-//                   )
-//                       : const Text('Add Department', style: TextStyle(fontSize: 16)),
-//                 ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../viewmodel/services/DepartmentServices/add/CreateDepartmentController.dart';
 
 class AddDepartmentScreen extends StatelessWidget {
-  final CreateDepartmentController departmentController = Get.put(CreateDepartmentController());
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _textEditingController = TextEditingController();
-  final RxBool isLoading = false.obs;
-
   @override
   Widget build(BuildContext context) {
-    // Listen to departmentName changes and update the TextEditingController
-    ever(departmentController.departmentName, (value) {
-      _textEditingController.value = _textEditingController.value.copyWith(
-        text: value,
-        selection: TextSelection.fromPosition(
-          TextPosition(offset: value.length),
-        ),
-      );
-    });
+    final CreateDepartmentController controller = Get.put(CreateDepartmentController());
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Add Department'),
+        title: const Text('Create Department'),
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Department Name',
-                      border: OutlineInputBorder(),
-                    ),
-                    onChanged: departmentController.setDepartmentName,
-                    controller: _textEditingController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a department name';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 120),
-                  Obx(() => departmentController.isLoading.value
-                      ? const CircularProgressIndicator()
-                      : ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        departmentController.addDepartment();
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white, backgroundColor: Colors.blue,
-                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                      minimumSize: const Size(100, 60),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      elevation: 5,
-                    ),
-                    child: isLoading.value
-                        ? const SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: CircularProgressIndicator(
-                        color: Colors.black,
-                        strokeWidth: 2,
-                      ),
-                    )
-                        : const Text('Add Department', style: TextStyle(fontSize: 16)),
-                  ),
-                  ),
-                ],
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: controller.formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                controller: controller.textController,
+                decoration: const InputDecoration(labelText: 'Enter Department Name'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a department name';
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  controller.setDepartmentName(value);
+                },
               ),
-            ),
+              const SizedBox(height: 30),
+              Obx(() => Center(
+                child: ElevatedButton(
+                  onPressed: controller.isLoading.value
+                      ? null
+                      : () {
+                    if (controller.formKey.currentState?.validate() ?? false) {
+                      controller.addDepartment();
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.blue, // Text color
+                    padding: EdgeInsets.symmetric(vertical: 14, horizontal: 24),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12), // Rounded corners
+                    ),
+                    elevation: 5, // Elevation
+                  ),
+                  child: controller.isLoading.value
+                      ? SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                      strokeWidth: 2.5,
+                    ),
+                  )
+                      : Text(
+                    'Submit',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              )),
+            ],
           ),
         ),
       ),

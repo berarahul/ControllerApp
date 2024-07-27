@@ -8,7 +8,7 @@ import '../../../viewmodel/services/LoginService/AuthServices.dart';
 
 
 class Controllerscreen extends StatelessWidget {
-  final List<String> buttonNames = ['Pending Request', 'Department','HOD','Holiday'];
+  final List<String> buttonNames = ['Teacher Controller', 'Department','HOD','Holiday'];
   final List<String> iconPaths = [
     'assets/images/pending_request.png', // replace with your student icon path
     // replace with your teacher icon path
@@ -82,7 +82,7 @@ class Controllerscreen extends StatelessWidget {
                                     title: buttonNames[index],
                                     iconPath: iconPaths[index],
                                     onTap: () {
-                                      if (buttonNames[index] == 'Pending Request') {
+                                      if (buttonNames[index] == 'Teacher Controller') {
                                         Get.toNamed(AppRoutes.Pendingrequest);
                                       }
                                       else if (buttonNames[index] == 'Department') {

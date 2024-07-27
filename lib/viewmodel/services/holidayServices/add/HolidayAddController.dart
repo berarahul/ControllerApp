@@ -40,6 +40,15 @@ class Holidayaddcontroller extends GetxController {
     post.value = newPost;
   }
 
+  // Method to reset the post
+  void resetPost() {
+    post.value = PostModel(
+      reason: '',
+      startDate: DateTime.now(),
+      endDate: DateTime.now(),
+    );
+  }
+
   Future<void> sendHolidayData() async {
     final url = Uri.parse('https://attendancesystem-s1.onrender.com/api/holiday/createHoliday');
     ApiHelper apiHelper = ApiHelper(); // Create an instance of ApiHelper
@@ -55,10 +64,12 @@ class Holidayaddcontroller extends GetxController {
         // Handle successful response
         print('Holiday added successfully');
         Get.snackbar("Success", "Holiday added successfully");
+        resetPost(); // Reset the post data
       } else {
         // Handle error response
         print('Failed to add holiday: ${response.statusCode}');
-        Get.snackbar("OOps", "Holiday did not Added");      }
+        Get.snackbar("OOps", "Holiday did not Added");
+      }
     } catch (e) {
       // Handle exceptions
       print('Error sending holiday data: $e');
@@ -66,3 +77,4 @@ class Holidayaddcontroller extends GetxController {
     }
   }
 }
+

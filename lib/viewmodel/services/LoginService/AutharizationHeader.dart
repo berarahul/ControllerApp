@@ -50,7 +50,9 @@ class ApiHelper {
     );
     if (response.statusCode == 201) {
       print('Data posted successfully');
-    } else {
+    }
+
+    else {
       print('Failed to post data, status code: ${response.statusCode}');
     }
   }

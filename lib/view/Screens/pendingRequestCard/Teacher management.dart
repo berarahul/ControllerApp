@@ -1,18 +1,20 @@
-import 'package:controller/view/Screens/holidayCard/widgets/UpdateAndDeleteHolidayScreen.dart';
-import 'package:controller/view/Screens/holidayCard/widgets/createholidayScreen.dart';
+import 'package:controller/view/Screens/pendingRequestCard/pendingTeacherList.dart';
+import 'package:controller/view/Screens/pendingRequestCard/widgets/Remove%20Teacher%20Department.dart';
+import 'package:controller/viewmodel/services/DepartmentServices/controller/DepartmentController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/AppColors.dart';
-import '../../../viewmodel/services/holidayServices/holidayScreenController.dart';
-import '../../../viewmodel/services/holidayServices/update/HolidayUpdateAndDeleteController.dart';
+import '../../../viewmodel/services/PendingRequestServices/TeacherMangementController.dart';
+import '../../../viewmodel/services/PendingRequestServices/pendiingTeacherListController.dart';
 
 
-class HolidayActionsScreen extends StatelessWidget {
-  final HolidayScreenController controller = Get.put(HolidayScreenController());
-final HolidayController holidayController=Get.put(HolidayController());
-  HolidayActionsScreen({super.key});
+
+class TeacherControllerActionsScreen extends StatelessWidget {
+  final Teachermangementcontroller controller = Get.put(Teachermangementcontroller());
+ final TeacherController teacherController=Get.put(TeacherController());
+  TeacherControllerActionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ final HolidayController holidayController=Get.put(HolidayController());
             const Padding(
               padding: EdgeInsets.only(top: 40.0, bottom: 20.0),
               child: Text(
-                'Holiday Management',
+                'Teacher Management',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -48,7 +50,7 @@ final HolidayController holidayController=Get.put(HolidayController());
                         onTap: () {
                           _handleAction(context, controller.actions[index]);
                         },
-                        child: HolidayActionWidget(
+                        child: DepartmentActionWidget(
                           actionText: controller.actions[index],
                           index: index,
                         ),
@@ -92,19 +94,17 @@ final HolidayController holidayController=Get.put(HolidayController());
   }
 
   void _handleAction(BuildContext context, String action) {
-    if (action == 'Create Holiday') {
-      controller.addHoliday();
-      _showAddHolidayModal(context);
+    if (action == 'Pending Teacher Request') {
+      controller.pendingTeacherRequest();
+      teacherController.fetchTeachers();
+      _showAddDepartmentModal(context);
+    } else if (action == 'Remove Teacher Department') {
+      controller.RemoveTeacherDepartment();
+      _showDeleteDepartmentModal(context);
     }
-    else if (action == 'Update And Delete Holiday') {
-      controller.editDeleteHoliday();
-      holidayController.fetchHolidays();
-      _showUpdateHolidayModal(context);
-    }
-
   }
 
-  void _showAddHolidayModal(BuildContext context) {
+  void _showAddDepartmentModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -112,12 +112,12 @@ final HolidayController holidayController=Get.put(HolidayController());
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
-        child: Createholidayscreen(),
+        child: TeacherListScreen(),
       ),
     );
   }
 
-  void _showUpdateHolidayModal(BuildContext context) {
+  void _showDeleteDepartmentModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -125,24 +125,21 @@ final HolidayController holidayController=Get.put(HolidayController());
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
-
-     child: HolidayListScreen(),
+        child: RemoveTeacherDepartment(),
       ),
     );
   }
-
-
 
 
 
 
 }
 
-class HolidayActionWidget extends StatelessWidget {
+class DepartmentActionWidget extends StatelessWidget {
   final String actionText;
   final int index;
 
-  const HolidayActionWidget({
+  const DepartmentActionWidget({
     Key? key,
     required this.actionText,
     required this.index,
@@ -201,14 +198,11 @@ class HolidayActionWidget extends StatelessWidget {
   Widget _buildIconForAction(String actionText) {
     IconData iconData;
     switch (actionText) {
-      case 'Create Holiday':
-        iconData = Icons.add_circle_outline;
+      case 'Pending Teacher Request':
+        iconData = Icons.error_outline_outlined;
         break;
-      case 'Update And Delete Holiday':
-        iconData = Icons.update;
-        break;
-        case 'Delete Holiday':
-        iconData = Icons.delete;
+      case 'Remove Teacher Department':
+        iconData = Icons.remove;
         break;
       default:
         iconData = Icons.error_outline;

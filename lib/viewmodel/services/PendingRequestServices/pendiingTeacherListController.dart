@@ -27,7 +27,7 @@ ApiHelper apiHelper=ApiHelper();
         List<dynamic> data = jsonDecode(response.body);
         teachers.value = data.map((json) => Teacher.fromJson(json)).toList();
       } else {
-        Get.snackbar('Error', 'Failed to load teachers');
+
       }
     } catch (e) {
       Get.snackbar('Error', 'An error occurred: $e');
@@ -82,12 +82,6 @@ ApiHelper apiHelper=ApiHelper();
     }
   }
 }
-
-
-
-
-
-
 
 class DepartmentController extends GetxController {
   var departments = <Department>[].obs;

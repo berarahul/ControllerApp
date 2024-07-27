@@ -19,7 +19,7 @@ class HodController extends GetxController {
       currentHod.value = await HodService.fetchCurrentHod(departmentId);
     } catch (e) {
       print('Error fetching current HOD: $e'); // Print the actual error
-      currentHod.value = 'Error loading current HOD';
+      currentHod.value = 'Currently There is no HOD';
     } finally {
       isLoading.value = false;
     }

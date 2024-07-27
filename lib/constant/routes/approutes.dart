@@ -6,6 +6,7 @@ import '../../view/Screens/DepartmentCard/DepartmentScreen.dart';
 import '../../view/Screens/HODCard/ChangeHodScreen.dart';
 import '../../view/Screens/Login/Login_Screen.dart';
 import '../../view/Screens/holidayCard/holidayScreen.dart';
+import '../../view/Screens/pendingRequestCard/Teacher management.dart';
 import '../../view/Screens/pendingRequestCard/pendingTeacherList.dart';
 
 // import other screens as needed
@@ -22,7 +23,7 @@ class AppRoutes {
   static List<GetPage> routes = [
     GetPage(name: login, page: () => LoginScreen()),
     GetPage(name: controller, page: () => Controllerscreen()),
-    GetPage(name: Pendingrequest, page: () => TeacherListScreen()),
+    GetPage(name: Pendingrequest, page: () => TeacherControllerActionsScreen()),
     GetPage(name: Department, page: () => DepartmentActionsScreen()),
     GetPage(name: HOD, page: () => ChangeHodScreen()),
     GetPage(name: holiday, page: () => HolidayActionsScreen()),

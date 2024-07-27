@@ -4,13 +4,14 @@ import 'package:controller/viewmodel/services/hodServices/HodDropdownController.
 import 'package:controller/viewmodel/services/hodServices/TeacherDropdownController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../viewmodel/services/hodServices/HodController.dart';
+import '../../../../viewmodel/services/hodServices/HodController.dart';
 
 
-class ChangeHodScreen extends StatelessWidget {
+
+class RemoveTeacherDepartment extends StatelessWidget {
   final HodController hodController = Get.put(HodController());
   final Hoddropdowncontroller deleteController = Get.put(Hoddropdowncontroller());
-Teacherdropdowncontroller teacherdropdowncontroller = Get.put(Teacherdropdowncontroller());
+  Teacherdropdowncontroller teacherdropdowncontroller = Get.put(Teacherdropdowncontroller());
   final isLoading = false.obs;
 
   @override
@@ -18,7 +19,7 @@ Teacherdropdowncontroller teacherdropdowncontroller = Get.put(Teacherdropdowncon
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Change HOD'),
+        title: const Text('Teacher Remove From Department'),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -35,15 +36,15 @@ Teacherdropdowncontroller teacherdropdowncontroller = Get.put(Teacherdropdowncon
                   },
                 ),
                 const SizedBox(height: 20,),
-                Obx(() {
-                  if (hodController.isLoading.value) {
-                    return const CircularProgressIndicator();
-                  }
-                  return Text(
-                    'Current HOD: ${hodController.currentHod.value}',
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  );
-                }),
+                // Obx(() {
+                //   if (hodController.isLoading.value) {
+                //     return const CircularProgressIndicator();
+                //   }
+                //   return Text(
+                //     'Current HOD: ${hodController.currentHod.value}',
+                //     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                //   );
+                // }),
                 const SizedBox(height: 20,),
 
                 TeacherDropdown(),
@@ -54,7 +55,7 @@ Teacherdropdowncontroller teacherdropdowncontroller = Get.put(Teacherdropdowncon
                 Obx(() => ElevatedButton(
                   onPressed: () {
                     isLoading.value = true; // Start loading indicator
-                    teacherdropdowncontroller.changeHod().then((_) {
+                    teacherdropdowncontroller.removeTeacher().then((_) {
                       isLoading.value = false; // Stop loading indicator when done
                     });
                   },
@@ -77,7 +78,7 @@ Teacherdropdowncontroller teacherdropdowncontroller = Get.put(Teacherdropdowncon
                       strokeWidth: 2,
                     ),
                   )
-                      : const Text('Change HOD', style: TextStyle(fontSize: 16)),
+                      : const Text('Teacher Remove', style: TextStyle(fontSize: 16)),
                 )),
               ],
             ),
