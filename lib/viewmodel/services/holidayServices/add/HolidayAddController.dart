@@ -50,7 +50,8 @@ class Holidayaddcontroller extends GetxController {
   }
 
   Future<void> sendHolidayData() async {
-    final url = Uri.parse('https://attendancesystem-s1.onrender.com/api/holiday/createHoliday');
+    final url = Uri.parse(
+        'https://attendancesystem-s1.onrender.com/api/holiday/createHoliday');
     ApiHelper apiHelper = ApiHelper(); // Create an instance of ApiHelper
     final headers = await apiHelper.getHeaders();
     final body = json.encode(post.value.toJson());
@@ -77,4 +78,3 @@ class Holidayaddcontroller extends GetxController {
     }
   }
 }
-

@@ -9,8 +9,6 @@ import '../../../viewmodel/services/AddTeacherToDept/AddTeacherTeacherDropdownCo
 import '../../../viewmodel/services/AddTeacherToDept/SecondtimeAddTeacherDepartmentDropdownController.dart';
 import '../../../viewmodel/services/AddTeacherToDept/secondtimeteacheraddController.dart';
 
-
-
 class AddTeacherToDepartmentScreen extends StatelessWidget {
 
   final TeacherAddController teacherAddController = Get.put(TeacherAddController());

@@ -10,8 +10,6 @@ import 'AuthServices.dart';
 class ApiHelper {
   final AuthService authService = AuthService();
 
-
-
   Future<Map<String, String>> getHeaders() async {
     final String? token = authService.getToken();
 
@@ -50,9 +48,7 @@ class ApiHelper {
     );
     if (response.statusCode == 201) {
       print('Data posted successfully');
-    }
-
-    else {
+    } else {
       print('Failed to post data, status code: ${response.statusCode}');
     }
   }
@@ -89,24 +85,4 @@ class ApiHelper {
 
     return response;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-

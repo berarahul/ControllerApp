@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,8 +13,6 @@ import '../../../../model/login/LoginModel.dart';
 import '../../../../viewmodel/services/LoginService/AuthServices.dart';
 import '../../../../viewmodel/services/LoginService/LoginController.dart';
 import '../../ControllerScreen/ControllerScreen.dart';
-
-
 
 class Login_form extends StatelessWidget {
   const Login_form({
@@ -47,7 +44,7 @@ class Login_form extends StatelessWidget {
 
         // Password TextFormField
         Obx(
-              () => TextFormField(
+          () => TextFormField(
             controller: passwordController,
             obscureText: loginController.obscureText.value,
             decoration: InputDecoration(
@@ -72,12 +69,13 @@ class Login_form extends StatelessWidget {
           children: [
             TextButton(
               onPressed: () {
-                Get.snackbar("Forget Password", "This Features Available on Next Update");
+                Get.snackbar("Forget Password",
+                    "This Features Available on Next Update");
               },
               child: const Text(
-
                 RTexts.Forgetpassword,
-                style: TextStyle(fontSize: RSizes.fontSizeLg,color: AppColors.appcolor),
+                style: TextStyle(
+                    fontSize: RSizes.fontSizeLg, color: AppColors.appcolor),
               ),
             ),
           ],
@@ -99,12 +97,10 @@ class Login_form extends StatelessWidget {
                 String password = passwordController.text.trim();
 
                 try {
-                  UserModel? userModel = await authService.login(username, password); // Call the login method with parameters
+                  UserModel? userModel = await authService.login(username,
+                      password); // Call the login method with parameters
                   if (userModel != null) {
-
-                 Get.to(Controllerscreen());
-
-
+                    Get.to(Controllerscreen());
                   } else {
                     // Handle login failure
                     Get.snackbar('Login Failed', 'Invalid credentials');

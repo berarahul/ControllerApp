@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../../../../viewmodel/services/DepartmentServices/add/CreateDepartmentController.dart';
 
 class AddDepartmentScreen extends StatelessWidget {
+  const AddDepartmentScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final CreateDepartmentController controller = Get.put(CreateDepartmentController());
@@ -45,14 +47,14 @@ class AddDepartmentScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.blue, // Text color
-                    padding: EdgeInsets.symmetric(vertical: 14, horizontal: 24),
+                    padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12), // Rounded corners
                     ),
                     elevation: 5, // Elevation
                   ),
                   child: controller.isLoading.value
-                      ? SizedBox(
+                      ? const SizedBox(
                     width: 24,
                     height: 24,
                     child: CircularProgressIndicator(
@@ -60,7 +62,7 @@ class AddDepartmentScreen extends StatelessWidget {
                       strokeWidth: 2.5,
                     ),
                   )
-                      : Text(
+                      : const Text(
                     'Submit',
                     style: TextStyle(
                       fontSize: 16,

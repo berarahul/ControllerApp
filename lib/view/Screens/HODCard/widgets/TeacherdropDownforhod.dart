@@ -1,9 +1,6 @@
 import 'package:controller/model/DepartmentCard/allTeacherModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../model/DepartmentCard/allDepartmentModel.dart';
-import '../../../../viewmodel/services/DepartmentServices/Delete/DeleteDepartmentController.dart';
 import '../../../../viewmodel/services/hodServices/TeacherDropdownController.dart';
 
 class TeacherDropdown extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:controller/model/DepartmentCard/allTeacherModel.dart';
 import 'package:controller/viewmodel/services/LoginService/AutharizationHeader.dart';
-import 'package:controller/viewmodel/services/hodServices/HodDropdownController.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -17,7 +17,6 @@ class TeacherServiceforAddTeacher {
       Uri.parse(
           'https://attendancesystem-s1.onrender.com/api/controller/teachers?primaryDept=$deptid'), // Replace with your API endpoint
       headers: headers,
-
     );
 
     if (response.statusCode == 200) {
@@ -30,7 +29,7 @@ class TeacherServiceforAddTeacher {
     }
   }
 
-  static Future<void> ChangeHOD(int teacherID,int deptID) async {
+  static Future<void> ChangeHOD(int teacherID, int deptID) async {
     print("Hi update");
     ApiHelper apiHelper = ApiHelper(); // Create an instance of ApiHelper
     final headers = await apiHelper.getHeaders();

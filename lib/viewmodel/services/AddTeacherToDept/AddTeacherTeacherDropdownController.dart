@@ -109,7 +109,9 @@ class Addteacherteacherdropdowncontroller extends GetxController {
   var selectedTeachers = Rxn<AllTeacherModel>();
   var isLoading = false.obs;
 
-  final Secondtimeaddteacherdepartmentdropdowncontroller departmentDropdownController = Get.put(Secondtimeaddteacherdepartmentdropdowncontroller());
+  final Secondtimeaddteacherdepartmentdropdowncontroller
+      departmentDropdownController =
+      Get.put(Secondtimeaddteacherdepartmentdropdowncontroller());
 
   @override
   void onInit() {
@@ -119,7 +121,8 @@ class Addteacherteacherdropdowncontroller extends GetxController {
   Future<void> fetchTeachers(int dept) async {
     isLoading.value = true;
     try {
-      final List<AllTeacherModel> teacherList = await TeacherServiceforAddTeacher.fetchTeachers(dept);
+      final List<AllTeacherModel> teacherList =
+          await TeacherServiceforAddTeacher.fetchTeachers(dept);
       teachers.value = teacherList;
       print(teacherList);
     } catch (e) {
@@ -144,7 +147,10 @@ class Addteacherteacherdropdowncontroller extends GetxController {
 
     isLoading.value = true;
     try {
-      final selectedDepartmentIds = departmentDropdownController.selectedDepartments.map((department) => department.id).toList();
+      final selectedDepartmentIds = departmentDropdownController
+          .selectedDepartments
+          .map((department) => department.id)
+          .toList();
       final requestBody = jsonEncode({
         'teacherId': selectedTeachers.value!.teacherId,
         'addDept': selectedDepartmentIds,
@@ -154,7 +160,8 @@ class Addteacherteacherdropdowncontroller extends GetxController {
       print("Request Body: $requestBody");
 
       final response = await http.put(
-        Uri.parse('https://attendancesystem-s1.onrender.com/api/controller/changeDepartment'),
+        Uri.parse(
+            'https://attendancesystem-s1.onrender.com/api/controller/changeDepartment'),
         headers: headers,
         body: requestBody,
       );

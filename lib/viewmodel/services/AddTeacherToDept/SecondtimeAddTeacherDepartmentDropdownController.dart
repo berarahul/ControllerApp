@@ -35,7 +35,6 @@
 //
 //
 
-
 import 'package:controller/model/DepartmentCard/allDepartmentModel.dart';
 import 'package:controller/viewmodel/services/DepartmentServices/Delete/DepartmentService.dart';
 import 'package:get/get.dart';
@@ -64,8 +63,10 @@ class Secondtimeaddteacherdepartmentdropdowncontroller extends GetxController {
   }
 
   void updateSelectedDepartments(List<int> departmentIds) {
-    selectedDepartments.value = departments.where((dept) => departmentIds.contains(dept.id)).toList();
+    selectedDepartments.value =
+        departments.where((dept) => departmentIds.contains(dept.id)).toList();
   }
+
   void clearSelectedDepartments() {
     selectedDepartments.clear();
   }

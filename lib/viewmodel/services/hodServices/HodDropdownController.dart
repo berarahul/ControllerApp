@@ -3,7 +3,6 @@ import 'package:controller/model/DepartmentCard/allDepartmentModel.dart';
 import 'package:controller/viewmodel/services/DepartmentServices/Delete/DepartmentService.dart';
 import 'package:get/get.dart';
 
-
 class Hoddropdowncontroller extends GetxController {
   var departments = <AllDepartmentModel>[].obs;
   var selectedDepartment = Rx<AllDepartmentModel?>(null);
@@ -28,6 +27,7 @@ class Hoddropdowncontroller extends GetxController {
   }
 
   void updateSelectedDepartment(int? departmentId) {
-    selectedDepartment.value = departments.firstWhere((dept) => dept.id == departmentId, orElse: () => null!);
+    selectedDepartment.value = departments
+        .firstWhere((dept) => dept.id == departmentId, orElse: () => null!);
   }
 }

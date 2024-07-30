@@ -10,7 +10,7 @@ import '../../../model/teacherlist/TeacherListModel.dart';
 class TeacherController extends GetxController {
   var teachers = <Teacher>[].obs;
   var isLoading = true.obs;
-ApiHelper apiHelper=ApiHelper();
+  ApiHelper apiHelper = ApiHelper();
   @override
   void onInit() {
     fetchTeachers();
@@ -21,18 +21,16 @@ ApiHelper apiHelper=ApiHelper();
     try {
       isLoading.value = true;
       final headers = await apiHelper.getHeaders(); // Get headers with token
-      final response = await ApiHelper.get('controller/registeredTeacher', headers: headers); // Perform GET request with headers
+      final response = await ApiHelper.get('controller/registeredTeacher',
+          headers: headers); // Perform GET request with headers
 
       if (response.statusCode == 200) {
         List<dynamic> data = jsonDecode(response.body);
         teachers.value = data.map((json) => Teacher.fromJson(json)).toList();
-      } else {
-
-      }
+      } else {}
     } catch (e) {
       Get.snackbar('Error', 'An error occurred: $e');
-    }
-    finally {
+    } finally {
       isLoading.value = false; // Set loading to false
     }
   }
@@ -41,12 +39,13 @@ ApiHelper apiHelper=ApiHelper();
     teachers.remove(teacher);
   }
 
-
-  Future<ApiResponse> addDepartmentsToTeacher(Map<String, dynamic> requestBody) async {
+  Future<ApiResponse> addDepartmentsToTeacher(
+      Map<String, dynamic> requestBody) async {
     final headers = await apiHelper.getHeaders();
     try {
       final response = await http.post(
-        Uri.parse('https://attendancesystem-s1.onrender.com/api/controller/approveTeacher'),
+        Uri.parse(
+            'https://attendancesystem-s1.onrender.com/api/controller/approveTeacher'),
         headers: headers,
         body: json.encode(requestBody),
       );
@@ -55,7 +54,6 @@ ApiHelper apiHelper=ApiHelper();
         print("success");
         // Get.snackbar("Success", "Registration successfully submitted");
         return ApiResponse(isSuccess: true);
-
       } else {
         return ApiResponse(isSuccess: false);
       }
@@ -64,11 +62,12 @@ ApiHelper apiHelper=ApiHelper();
     }
   }
 
-
   Future<void> rejectTeacher(int teacherId) async {
     try {
       final headers = await apiHelper.getHeaders(); // Get headers with token
-      final response = await ApiHelper.delete('controller/rejectTeacher?teacherId=$teacherId', headers: headers); // Perform DELETE request with headers
+      final response = await ApiHelper.delete(
+          'controller/rejectTeacher?teacherId=$teacherId',
+          headers: headers); // Perform DELETE request with headers
 
       if (response.statusCode == 200) {
         // Remove the teacher from the list after a successful API call
@@ -93,20 +92,22 @@ class DepartmentController extends GetxController {
   }
 
   void fetchDepartments() async {
-    final response = await http.get(Uri.parse('https://attendancesystem-s1.onrender.com/api/dept/all'));
+    final response = await http.get(
+        Uri.parse('https://attendancesystem-s1.onrender.com/api/dept/all'));
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
-      departments.value = data.map((json) => Department.fromJson(json)).toList();
+      departments.value =
+          data.map((json) => Department.fromJson(json)).toList();
     } else {
       Get.snackbar('Error', 'Failed to load departments');
     }
   }
 }
+
 class ApiResponse {
   final bool isSuccess;
 
   ApiResponse({required this.isSuccess});
-
 }
 
 // Add this method for making the API call

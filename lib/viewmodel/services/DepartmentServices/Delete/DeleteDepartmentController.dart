@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '../../../../model/DepartmentCard/allDepartmentModel.dart';
 import 'DepartmentService.dart';
- // Update the import as needed
+// Update the import as needed
 
 class DeleteDepartmentController extends GetxController {
   var departments = <AllDepartmentModel>[].obs;
@@ -18,7 +18,8 @@ class DeleteDepartmentController extends GetxController {
   Future<void> fetchDepartments() async {
     isLoading.value = true;
     try {
-      final List<AllDepartmentModel> departmentList = await DepartmentService.fetchDepartments();
+      final List<AllDepartmentModel> departmentList =
+          await DepartmentService.fetchDepartments();
       departments.value = departmentList;
     } catch (e) {
       Get.snackbar('Error', 'Failed to fetch departments');
@@ -49,8 +50,4 @@ class DeleteDepartmentController extends GetxController {
       isLoading.value = false;
     }
   }
-
-
-
 }
-

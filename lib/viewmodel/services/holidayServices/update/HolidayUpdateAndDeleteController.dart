@@ -16,7 +16,8 @@ class HolidayController extends GetxController {
 
   void fetchHolidays() async {
     isLoading.value = true;
-    final url = Uri.parse('https://attendancesystem-s1.onrender.com/api/holiday/allHolidays');
+    final url = Uri.parse(
+        'https://attendancesystem-s1.onrender.com/api/holiday/allHolidays');
 
     ApiHelper apiHelper = ApiHelper(); // Create an instance of ApiHelper
     final headers = await apiHelper.getHeaders();
@@ -25,7 +26,8 @@ class HolidayController extends GetxController {
       final response = await http.get(url, headers: headers);
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
-        holidays.value = data.map((json) => HolidayModel.fromJson(json)).toList();
+        holidays.value =
+            data.map((json) => HolidayModel.fromJson(json)).toList();
       } else {
         // Handle error
         print('Failed to load holidays');
@@ -39,7 +41,8 @@ class HolidayController extends GetxController {
   }
 
   void deleteHoliday(int id) async {
-    final url = Uri.parse('https://attendancesystem-s1.onrender.com/api/holiday/deleteHoliday?id=$id');
+    final url = Uri.parse(
+        'https://attendancesystem-s1.onrender.com/api/holiday/deleteHoliday?id=$id');
 
     // Define the headers
     ApiHelper apiHelper = ApiHelper(); // Create an instance of ApiHelper
@@ -59,8 +62,10 @@ class HolidayController extends GetxController {
     }
   }
 
-  void updateHoliday(String id, String reason, DateTime startDate, DateTime endDate) async {
-    final url = Uri.parse('https://attendancesystem-s1.onrender.com/api/holiday/editHoliday');
+  void updateHoliday(
+      String id, String reason, DateTime startDate, DateTime endDate) async {
+    final url = Uri.parse(
+        'https://attendancesystem-s1.onrender.com/api/holiday/editHoliday');
     ApiHelper apiHelper = ApiHelper(); // Create an instance of ApiHelper
     final headers = await apiHelper.getHeaders();
     final body = json.encode({
@@ -72,7 +77,7 @@ class HolidayController extends GetxController {
 
     try {
       final response = await http.put(url, headers: headers, body: body);
-         print(body);
+      print(body);
       if (response.statusCode == 200) {
         // Handle successful update
         Get.snackbar("Success", "Holiday Updated Successfully");
@@ -86,5 +91,4 @@ class HolidayController extends GetxController {
       print('Error updating holiday: $e');
     }
   }
-
 }

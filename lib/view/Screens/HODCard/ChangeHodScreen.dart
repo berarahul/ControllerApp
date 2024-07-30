@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../viewmodel/services/hodServices/HodController.dart';
 
-
 class ChangeHodScreen extends StatelessWidget {
   final HodController hodController = Get.put(HodController());
   final Hoddropdowncontroller deleteController = Get.put(Hoddropdowncontroller());

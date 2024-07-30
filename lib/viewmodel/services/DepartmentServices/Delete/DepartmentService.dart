@@ -3,12 +3,15 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../../../../model/DepartmentCard/allDepartmentModel.dart';
- // Update the import as needed
-ApiHelper apiHelper =ApiHelper();
+
+// Update the import as needed
+ApiHelper apiHelper = ApiHelper();
+
 class DepartmentService {
   static Future<List<AllDepartmentModel>> fetchDepartments() async {
     final response = await http.get(
-      Uri.parse('https://attendancesystem-s1.onrender.com/api/dept/all'), // Replace with your API endpoint
+      Uri.parse(
+          'https://attendancesystem-s1.onrender.com/api/dept/all'), // Replace with your API endpoint
       headers: {
         'Content-Type': 'application/json',
       },
@@ -26,10 +29,8 @@ class DepartmentService {
     ApiHelper apiHelper = ApiHelper(); // Create an instance of ApiHelper
     final headers = await apiHelper.getHeaders();
     final response = await ApiHelper.delete(
-
       'controller/deleteDepartment?deptId=$deptId', // Replace with your API endpoint
       headers: headers,
-
     );
 
     if (response.statusCode != 200) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../../model/DepartmentCard/allDepartmentModel.dart';
 import '../../../../viewmodel/services/DepartmentServices/Delete/DeleteDepartmentController.dart';
 

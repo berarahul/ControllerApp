@@ -1,11 +1,8 @@
-import 'package:controller/viewmodel/services/hodServices/TeacherDropdownController.dart';
-import 'package:controller/viewmodel/services/hodServices/TeacherService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../viewmodel/services/AddTeacherToDept/AddTeacherDepartmentDropdownController.dart';
 import '../../../../viewmodel/services/AddTeacherToDept/AddTeacherTeacherDropdownController.dart';
-import '../../../../viewmodel/services/DepartmentServices/Delete/DeleteDepartmentController.dart';
-import '../../../../viewmodel/services/hodServices/HodDropdownController.dart';
+
 
 class AddTeacherDepartmentDropdown extends StatelessWidget {
   final Function(int?)? onChanged;

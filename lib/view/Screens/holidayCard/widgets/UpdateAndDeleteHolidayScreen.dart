@@ -9,7 +9,10 @@ class HolidayListScreen extends StatelessWidget {
     HolidayController holidayController = Get.put(HolidayController());
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Holidays')),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Holidays'),
+      ),
       body: Obx(() {
         if (holidayController.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
@@ -39,11 +42,11 @@ class HolidayListScreen extends StatelessWidget {
                     ),
                   ),
                   trailing: PopupMenuButton<String>(
-                    onSelected: (String result) {
+                    onSelected: (String result) async {
                       if (result == 'Edit') {
                         _showEditDialog(context, holiday, holidayController);
                       } else if (result == 'Delete') {
-                        holidayController.deleteHoliday(holiday.id!);
+                        _showDeleteConfirmationDialog(context, holiday, holidayController);
                       }
                     },
                     itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
@@ -156,6 +159,33 @@ class HolidayListScreen extends StatelessWidget {
                 Navigator.of(context).pop();
               },
               child: const Text('Save'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showDeleteConfirmationDialog(BuildContext context, HolidayModel holiday, HolidayController holidayController) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Confirm Deletion'),
+          content: const Text('Are you sure you want to delete this holiday?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text('No'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                holidayController.deleteHoliday(holiday.id!);
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text('Yes'),
             ),
           ],
         );

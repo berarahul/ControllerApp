@@ -17,7 +17,6 @@ class TeacherService {
       Uri.parse(
           'https://attendancesystem-s1.onrender.com/api/hod/teacher/allTeachers?deptId=$deptid'), // Replace with your API endpoint
       headers: headers,
-
     );
 
     if (response.statusCode == 200) {
@@ -30,7 +29,7 @@ class TeacherService {
     }
   }
 
-  static Future<void> ChangeHOD(int teacherID,int deptID) async {
+  static Future<void> ChangeHOD(int teacherID, int deptID) async {
     print("Hi update");
     ApiHelper apiHelper = ApiHelper(); // Create an instance of ApiHelper
     final headers = await apiHelper.getHeaders();

@@ -5,12 +5,9 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'app.dart';
 
-
-Future<void>main() async{
-
+Future<void> main() async {
   await GetStorage.init();
   Get.put(AuthService());
-  runApp( MyApp());
+  runApp(MyApp());
   // Get.put(InternetConnectionController(),permanent: true);
-
 }

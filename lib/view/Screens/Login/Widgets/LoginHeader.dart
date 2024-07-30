@@ -5,7 +5,6 @@ import '../../../../constant/image_string.dart';
 import '../../../../constant/sizes.dart';
 import '../../../../constant/text_string.dart';
 
-
 class Login_header extends StatelessWidget {
   const Login_header({
     super.key,
@@ -21,8 +20,7 @@ class Login_header extends StatelessWidget {
       children: [
         Image(
           height: 150,
-          image: AssetImage(
-              dark ? RImages.darkAppLogo : RImages.LightAppLogo),
+          image: AssetImage(dark ? RImages.darkAppLogo : RImages.LightAppLogo),
         ),
         const SizedBox(height: RSizes.lg),
         Text(RTexts.loginTitle,

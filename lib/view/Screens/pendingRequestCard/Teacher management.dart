@@ -1,7 +1,6 @@
 import 'package:controller/view/Screens/pendingRequestCard/pendingTeacherList.dart';
-
 import 'package:controller/view/Screens/pendingRequestCard/widgets/Remove%20Teacher%20Department.dart';
-import 'package:controller/viewmodel/services/DepartmentServices/controller/DepartmentController.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -11,17 +10,15 @@ import '../../../viewmodel/services/PendingRequestServices/TeacherMangementContr
 import '../../../viewmodel/services/PendingRequestServices/pendiingTeacherListController.dart';
 import '../AddTeacherToDepartment/AddTeacherToDepartmentScreen.dart';
 
-
-
 class TeacherControllerActionsScreen extends StatelessWidget {
-  final Teachermangementcontroller controller = Get.put(Teachermangementcontroller());
- final TeacherController teacherController=Get.put(TeacherController());
+  final Teachermangementcontroller controller =
+      Get.put(Teachermangementcontroller());
+  final TeacherController teacherController = Get.put(TeacherController());
   TeacherControllerActionsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       extendBodyBehindAppBar: true, // Add this line
 
       body: Container(
@@ -78,10 +75,9 @@ class TeacherControllerActionsScreen extends StatelessWidget {
     } else if (hour >= 12 && hour < 17) {
       // Afternoon gradient
       gradientColors = [Colors.blue, Colors.lightBlue];
-    }else if (hour >= 17 && hour < 22) {
-      gradientColors=[AppColors.softRed,AppColors.peach];
-    }
-    else {
+    } else if (hour >= 17 && hour < 22) {
+      gradientColors = [AppColors.softRed, AppColors.peach];
+    } else {
       // Evening gradient
       gradientColors = [Colors.indigo, Colors.black];
     }
@@ -103,8 +99,7 @@ class TeacherControllerActionsScreen extends StatelessWidget {
     } else if (action == 'Remove Teacher From Department') {
       controller.RemoveTeacherDepartment();
       _showDeleteDepartmentModal(context);
-    }
-    else if (action =='Add Teacher To Department') {
+    } else if (action == 'Add Teacher To Department') {
       controller.AddTeacherDepartment();
       _showAddingDepartmentModal(context);
     }
@@ -123,8 +118,6 @@ class TeacherControllerActionsScreen extends StatelessWidget {
     );
   }
 
-
-
   void _showDeleteDepartmentModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -138,7 +131,6 @@ class TeacherControllerActionsScreen extends StatelessWidget {
     );
   }
 
-
   void _showAddingDepartmentModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -151,10 +143,6 @@ class TeacherControllerActionsScreen extends StatelessWidget {
       ),
     );
   }
-
-
-
-
 }
 
 class DepartmentActionWidget extends StatelessWidget {
@@ -177,15 +165,12 @@ class DepartmentActionWidget extends StatelessWidget {
     } else if (hour >= 12 && hour < 17) {
       // Afternoon gradient
       cardColors = [Colors.orangeAccent, Colors.yellowAccent];
-    }else if (hour >= 17 && hour < 22) {
-      cardColors=[AppColors.softRed,AppColors.peach];
-    }
-
-    else {
+    } else if (hour >= 17 && hour < 22) {
+      cardColors = [AppColors.softRed, AppColors.peach];
+    } else {
       // Evening gradient
       cardColors = [Colors.indigo, Colors.black];
     }
-
 
     return Card(
       color: Colors.white.withOpacity(0.3), // Semi-transparent white

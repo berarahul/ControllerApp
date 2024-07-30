@@ -18,18 +18,15 @@ class Teacherdropdowncontroller extends GetxController {
   int departmentId = 0;
   @override
   void onInit() {
-
     super.onInit();
   }
 
-
   Future<void> fetchTeacherss(int dept) async {
-
-
     departmentId = dept;
     isLoading.value = true;
     try {
-      final List<AllTeacherModel> teacherList = await TeacherService.fetchTeachers(dept);
+      final List<AllTeacherModel> teacherList =
+          await TeacherService.fetchTeachers(dept);
       teachers.value = teacherList;
       print(teacherList);
     } catch (e) {
@@ -51,7 +48,8 @@ class Teacherdropdowncontroller extends GetxController {
 
     isLoading.value = true;
     try {
-      await TeacherService.ChangeHOD(selectedteachers.value!.teacherId,departmentId as int);
+      await TeacherService.ChangeHOD(
+          selectedteachers.value!.teacherId, departmentId as int);
       teachers.remove(selectedteachers.value);
       setSelectedTeacher(null);
       Get.snackbar('Success', 'HOD change successfully');
@@ -61,7 +59,6 @@ class Teacherdropdowncontroller extends GetxController {
     } finally {
       isLoading.value = false;
     }
-
   }
 
   Future<void> removeTeacher() async {
@@ -84,7 +81,8 @@ class Teacherdropdowncontroller extends GetxController {
       print("Request Body: $requestBody");
 
       final response = await http.put(
-        Uri.parse('https://attendancesystem-s1.onrender.com/api/controller/changeDepartment'),
+        Uri.parse(
+            'https://attendancesystem-s1.onrender.com/api/controller/changeDepartment'),
         headers: headers,
         body: requestBody,
       );
@@ -105,9 +103,6 @@ class Teacherdropdowncontroller extends GetxController {
       isLoading.value = false;
     }
   }
-
-
-
 
   Future<void> AddTeacher() async {
     ApiHelper apiHelper = ApiHelper(); // Create an instance of ApiHelper
@@ -129,7 +124,8 @@ class Teacherdropdowncontroller extends GetxController {
       print("Request Body: $requestBody");
 
       final response = await http.put(
-        Uri.parse('https://attendancesystem-s1.onrender.com/api/controller/changeDepartment'),
+        Uri.parse(
+            'https://attendancesystem-s1.onrender.com/api/controller/changeDepartment'),
         headers: headers,
         body: requestBody,
       );
@@ -150,6 +146,4 @@ class Teacherdropdowncontroller extends GetxController {
       isLoading.value = false;
     }
   }
-
 }
-

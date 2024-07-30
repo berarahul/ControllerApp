@@ -4,7 +4,6 @@ class Departmentcontroller extends GetxController {
   var actions = [
     'Create Department',
     'Delete Department',
-
   ].obs;
 
   // Define methods to handle actions if needed
@@ -15,6 +14,4 @@ class Departmentcontroller extends GetxController {
   void deleteDepartment() {
     // Your logic to remove a student
   }
-
-
 }

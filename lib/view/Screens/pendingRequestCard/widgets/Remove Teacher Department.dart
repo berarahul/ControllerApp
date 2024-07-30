@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../viewmodel/services/hodServices/HodController.dart';
 
-
-
 class RemoveTeacherDepartment extends StatelessWidget {
   final HodController hodController = Get.put(HodController());
-  final Hoddropdowncontroller deleteController = Get.put(Hoddropdowncontroller());
-  Teacherdropdowncontroller teacherdropdowncontroller = Get.put(Teacherdropdowncontroller());
+  final Hoddropdowncontroller deleteController =
+      Get.put(Hoddropdowncontroller());
+  Teacherdropdowncontroller teacherdropdowncontroller =
+      Get.put(Teacherdropdowncontroller());
   final isLoading = false.obs;
 
   @override
@@ -35,42 +35,46 @@ class RemoveTeacherDepartment extends StatelessWidget {
                     }
                   },
                 ),
-                const SizedBox(height: 20,),
-                const SizedBox(height: 20,),
-
+                const SizedBox(
+                  height: 20,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 TeacherDropdown(),
-
                 const SizedBox(height: 20),
-
                 const SizedBox(height: 16),
                 Obx(() => ElevatedButton(
-                  onPressed: () {
-                    isLoading.value = true; // Start loading indicator
-                    teacherdropdowncontroller.removeTeacher().then((_) {
-                      isLoading.value = false; // Stop loading indicator when done
-                    });
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.blue,
-                    padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                    minimumSize: const Size(200, 60),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    elevation: 5,
-                  ),
-                  child: isLoading.value
-                      ? const SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: CircularProgressIndicator(
-                      color: Colors.black,
-                      strokeWidth: 2,
-                    ),
-                  )
-                      : const Text('Remove', style: TextStyle(fontSize: 16)),
-                )),
+                      onPressed: () {
+                        isLoading.value = true; // Start loading indicator
+                        teacherdropdowncontroller.removeTeacher().then((_) {
+                          isLoading.value =
+                              false; // Stop loading indicator when done
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.blue,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 40, vertical: 20),
+                        minimumSize: const Size(200, 60),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        elevation: 5,
+                      ),
+                      child: isLoading.value
+                          ? const SizedBox(
+                              width: 24,
+                              height: 24,
+                              child: CircularProgressIndicator(
+                                color: Colors.black,
+                                strokeWidth: 2,
+                              ),
+                            )
+                          : const Text('Remove',
+                              style: TextStyle(fontSize: 16)),
+                    )),
               ],
             ),
           ),
