@@ -19,7 +19,7 @@ class RTexts{
   static const String homeAppBarSubTitle="Rahul Bera";
 
   // For Login
-  static const String loginTitle="'Welcome to College Controller";
+  static const String loginTitle="Welcome to College Controller";
   static const String loginSubTitle="Please login to continue";
   static const String username="Username";
   static const String password="Password";

@@ -19,7 +19,7 @@ class RemoveTeacherDepartment extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Teacher Remove From Department'),
+        title: const Text('Remove Teacher From Department'),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -36,15 +36,6 @@ class RemoveTeacherDepartment extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 20,),
-                // Obx(() {
-                //   if (hodController.isLoading.value) {
-                //     return const CircularProgressIndicator();
-                //   }
-                //   return Text(
-                //     'Current HOD: ${hodController.currentHod.value}',
-                //     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                //   );
-                // }),
                 const SizedBox(height: 20,),
 
                 TeacherDropdown(),
@@ -78,7 +69,7 @@ class RemoveTeacherDepartment extends StatelessWidget {
                       strokeWidth: 2,
                     ),
                   )
-                      : const Text('Teacher Remove', style: TextStyle(fontSize: 16)),
+                      : const Text('Remove', style: TextStyle(fontSize: 16)),
                 )),
               ],
             ),

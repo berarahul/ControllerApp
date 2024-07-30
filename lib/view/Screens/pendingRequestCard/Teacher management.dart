@@ -1,4 +1,5 @@
 import 'package:controller/view/Screens/pendingRequestCard/pendingTeacherList.dart';
+
 import 'package:controller/view/Screens/pendingRequestCard/widgets/Remove%20Teacher%20Department.dart';
 import 'package:controller/viewmodel/services/DepartmentServices/controller/DepartmentController.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 import '../../../constant/AppColors.dart';
 import '../../../viewmodel/services/PendingRequestServices/TeacherMangementController.dart';
 import '../../../viewmodel/services/PendingRequestServices/pendiingTeacherListController.dart';
+import '../AddTeacherToDepartment/AddTeacherToDepartmentScreen.dart';
 
 
 
@@ -98,9 +100,13 @@ class TeacherControllerActionsScreen extends StatelessWidget {
       controller.pendingTeacherRequest();
       teacherController.fetchTeachers();
       _showAddDepartmentModal(context);
-    } else if (action == 'Remove Teacher Department') {
+    } else if (action == 'Remove Teacher From Department') {
       controller.RemoveTeacherDepartment();
       _showDeleteDepartmentModal(context);
+    }
+    else if (action =='Add Teacher To Department') {
+      controller.AddTeacherDepartment();
+      _showAddingDepartmentModal(context);
     }
   }
 
@@ -117,6 +123,8 @@ class TeacherControllerActionsScreen extends StatelessWidget {
     );
   }
 
+
+
   void _showDeleteDepartmentModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -126,6 +134,20 @@ class TeacherControllerActionsScreen extends StatelessWidget {
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         child: RemoveTeacherDepartment(),
+      ),
+    );
+  }
+
+
+  void _showAddingDepartmentModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: AddTeacherToDepartmentScreen(),
       ),
     );
   }
@@ -201,8 +223,11 @@ class DepartmentActionWidget extends StatelessWidget {
       case 'Pending Teacher Request':
         iconData = Icons.error_outline_outlined;
         break;
-      case 'Remove Teacher Department':
+      case 'Remove Teacher From Department':
         iconData = Icons.remove;
+        break;
+      case 'Add Teacher To Department':
+        iconData = Icons.add;
         break;
       default:
         iconData = Icons.error_outline;
