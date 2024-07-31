@@ -41,8 +41,11 @@ class TeacherListScreen extends StatelessWidget {
                       );
                     }).toList(),
                   ),
-                  SizedBox(height: 16.0),
+                  const SizedBox(height: 16.0),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white, backgroundColor: Colors.blue, // Set the color of the text here
+                    ),
                     onPressed: selectedDepartment.value == null
                         ? null
                         : () async {
@@ -69,7 +72,7 @@ class TeacherListScreen extends StatelessWidget {
                                   'Failed to add department to teacher');
                             }
                           },
-                    child: Text('Done'),
+                    child: const Center(child: Text('Done')),
                   ),
                 ],
               );
