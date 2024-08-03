@@ -5,6 +5,7 @@ class Teachermangementcontroller extends GetxController {
     'Pending Teacher Request',
     'Remove Teacher From Department',
     'Add Teacher To Department',
+
   ].obs;
 
   // Define methods to handle actions if needed
@@ -15,5 +16,10 @@ class Teachermangementcontroller extends GetxController {
   void RemoveTeacherDepartment() {
     // Your logic to remove a student
   }
-  void AddTeacherDepartment() {}
+
+  void AddTeacherDepartment() {
+
+
+  }
+
 }

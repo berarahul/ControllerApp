@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../constant/AppColors.dart';
+import '../../../viewmodel/services/DepartmentServices/PrimaryDepartmentUpdate/controller/DepartmentDropdownControllerForPrimary.dart';
+import 'EditPrimaryDeoartment/PrimaryDepartmentUpdate.dart';
 import 'Widgets/DepartmentAddScreen.dart';
 import 'Widgets/DepartmentDelete.dart';
 
@@ -97,6 +99,10 @@ class DepartmentActionsScreen extends StatelessWidget {
     } else if (action == 'Delete Department') {
       controller.deleteDepartment();
       _showDeleteDepartmentModal(context);
+    }else if (action == 'Edit Primary Department') {
+      controller.EditPrimaryDepartment();
+
+      _showEditPrimaryDepartmentModal(context);
     }
   }
 
@@ -122,6 +128,17 @@ class DepartmentActionsScreen extends StatelessWidget {
           bottom: MediaQuery.of(context).viewInsets.bottom,
         ),
         child: DeleteDepartmentScreen(),
+      ),
+    );
+  }  void _showEditPrimaryDepartmentModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: Primarydepartmentupdate(),
       ),
     );
   }
@@ -199,6 +216,9 @@ class DepartmentActionWidget extends StatelessWidget {
         break;
       case 'Delete Department':
         iconData = Icons.remove_circle_outline;
+        break;
+        case 'Edit Primary Department':
+        iconData = Icons.update;
         break;
       default:
         iconData = Icons.error_outline;
